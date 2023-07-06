@@ -1,6 +1,6 @@
 cabal-version:      >=1.10
 name:               logging-effect-colors
-version:            0.1.0.0
+version:            0.1.1.0
 synopsis:           Log messages in color
 description:        ANSI color coding for logging-effect log messages
 homepage:           https://github.com/obsidiansystems/logging-effect-colors
