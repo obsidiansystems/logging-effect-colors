@@ -15,35 +15,49 @@ wrapSGRCode codes t = mconcat
   , fromString $ setSGRCode [Reset]
   ]
 
+emergency, alert, critical, err, warning, notice, info, debug, trace :: [SGR]
+emergency =
+  [ SetColor Background Vivid Red
+  , SetColor Foreground Vivid Black
+  , SetConsoleIntensity BoldIntensity
+  ]
+alert =
+  [ SetColor Foreground Vivid Red
+  , SetConsoleIntensity BoldIntensity
+  ]
+critical =
+  [ SetColor Foreground Vivid Red
+  , SetConsoleIntensity BoldIntensity
+  ]
+err =
+  [ SetColor Foreground Dull Red
+  ]
+warning =
+  [ SetColor Foreground Vivid Yellow
+  ]
+notice =
+  [ SetColor Foreground Vivid Blue
+  ]
+info =
+  []
+debug =
+  [ SetColor Foreground Dull Green
+  ]
+trace =
+  [ SetColor Foreground Dull White
+  ]
+
 -- | Mapping of 'Severity' levels to SGR styles
 severitySgr :: Severity -> [SGR]
 severitySgr = \case
-  Emergency  ->
-    [ SetColor Background Vivid Red
-    , SetColor Foreground Vivid Black
-    , SetConsoleIntensity BoldIntensity
-    ]
-  Alert ->
-    [ SetColor Foreground Vivid Red
-    , SetConsoleIntensity BoldIntensity
-    ]
-  Critical ->
-    [ SetColor Foreground Vivid Red
-    , SetConsoleIntensity BoldIntensity
-    ]
-  Error ->
-    [ SetColor Foreground Dull Red
-    ]
-  Warning ->
-    [ SetColor Foreground Vivid Yellow
-    ]
-  Notice ->
-    [ SetColor Foreground Vivid Blue
-    ]
-  Informational -> []
-  Debug -> 
-    [ SetColor Foreground Dull Green
-    ]
+  Emergency -> emergency
+  Alert -> alert
+  Critical -> critical
+  Error -> err
+  Warning -> warning
+  Notice -> notice
+  Informational -> info
+  Debug -> debug
 
 -- | Color based on severity with a custom mapping of severity to SGR styles
 colorizeWith
