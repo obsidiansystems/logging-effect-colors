@@ -1,5 +1,22 @@
 {-# options_ghc -Wall #-}
-module Control.Monad.Log.Colors where
+module Control.Monad.Log.Colors
+  ( wrapSGRCode
+  , emergency
+  , alert
+  , critical
+  , err
+  , warning
+  , notice
+  , info
+  , debug
+  , trace
+  , severitySgr
+  , colorizeWith
+  , colorize
+  , renderWithColor
+  , SGR(..)
+  )
+  where
 
 import Control.Monad.Log
 import Data.String
@@ -69,7 +86,7 @@ colorizeWith f (WithSeverity sev msg) =
   WithSeverity sev $ wrapSGRCode (f sev) msg
 
 -- | Color based on severity with the default mapping of severity to SGR styles
-colorize 
+colorize
   :: (Monoid msg, IsString msg)
   => WithSeverity msg
   -> WithSeverity msg
